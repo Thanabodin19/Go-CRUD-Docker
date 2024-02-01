@@ -13,14 +13,14 @@
 POST : localhost:8000/humans
 
 ## Read 
-all human
-GET : localhost:8000/humans
+all human\
+GET : localhost:8000/humans\
 
-select human {id}
-GET : localhost:8000/humans/{id}
+select human {id}\
+GET : localhost:8000/humans/{id}\
 
 ## Update
-PUT : localhost:8000/humans/{id}
+PUT : localhost:8000/humans/{id}\
 
 ## Delete
-DELETE : localhost:8000/humans/{id}
+DELETE : localhost:8000/humans/{id}\
