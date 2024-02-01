@@ -7,7 +7,10 @@
 # Docker compose
 ### $ `docker compose up -d go_db`
 ### $ `docker compose build `
-### $ `docker compose up go-app `
+### $ `docker compose up go-app`
+up scall
+### $ `docker compose up --scale go-app=3 -d --build`
+
 
 ## Create
 POST : localhost:8000/humans
