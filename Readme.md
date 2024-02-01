@@ -1,13 +1,13 @@
 # Go-lang
-$ `go  mod init api`
-$ `go get github.com/gorilla/mux`
-$ `go get github.com/lib/pq`
-$ `touch main.go Dockerfile docker-compose.yml`
+## $ `go  mod init api`
+## $ `go get github.com/gorilla/mux`
+## $ `go get github.com/lib/pq`
+## $ `touch main.go Dockerfile docker-compose.yml`
 
 # Docker compose
-### $ `docker compose up -d go_db`
-### $ `docker compose build `
-### $ `docker compose up go-app `
+## $ `docker compose up -d go_db`
+## $ `docker compose build `
+## $ `docker compose up go-app `
 
 ## Create
 POST : localhost:8000/humans
