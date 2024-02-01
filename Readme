@@ -5,22 +5,22 @@ $ `go get github.com/lib/pq`
 $ `touch main.go Dockerfile docker-compose.yml`
 
 # Docker compose
-$ `docker compose up -d go_db`
-$ `docker compose build `
-$ `docker compose up go-app `
+### $ `docker compose up -d go_db`
+### $ `docker compose build `
+### $ `docker compose up go-app `
 
-# Create
+## Create
 POST : localhost:8000/humans
 
-# Read 
+## Read 
 all human
 GET : localhost:8000/humans
 
 select human {id}
 GET : localhost:8000/humans/{id}
 
-# Update
+## Update
 PUT : localhost:8000/humans/{id}
 
-# Delete
+## Delete
 DELETE : localhost:8000/humans/{id}
