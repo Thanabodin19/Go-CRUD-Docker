@@ -1,12 +1,12 @@
 # Go-lang
-### $ `go  mod init api`
+### $ `go mod init api`
 ### $ `go get github.com/gorilla/mux`
 ### $ `go get github.com/lib/pq`
 ### $ `touch main.go Dockerfile docker-compose.yml`
 
 # Docker compose
 ### $ `docker compose up -d go_db`
-### $ `docker compose build `
+### $ `docker compose build`
 ### $ `docker compose up go-app`
 up scall
 ### $ `docker compose up --scale go-app=3 -d --build`

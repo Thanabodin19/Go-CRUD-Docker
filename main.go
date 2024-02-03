@@ -34,6 +34,7 @@ func main() {
 
 	//create router
 	router := mux.NewRouter()
+	router.HandleFunc("/", root()).Methods("GET")
 	router.HandleFunc("/humans", getUsers(db)).Methods("GET")
 	router.HandleFunc("/humans/{id}", getUser(db)).Methods("GET")
 	router.HandleFunc("/humans", createUser(db)).Methods("POST")
@@ -44,13 +45,23 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8000", jsonContentTypeMiddleware(router)))
 }
 
+
 func jsonContentTypeMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		next.ServeHTTP(w, r)
 	})
 }
-
+// root /
+func root()http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+	json.NewEncoder(w).Encode("Create 			POST : localhost:8000/humans")
+	json.NewEncoder(w).Encode("Read all human 	GET : localhost:8000/humans")
+	json.NewEncoder(w).Encode("select human{id} GET : localhost:8000/humans/{id}")
+	json.NewEncoder(w).Encode("Update 			PUT : localhost:8000/humans/{id}")
+	json.NewEncoder(w).Encode("Delete 			DELETE : localhost:8000/humans/{id}")
+	}
+}
 // get all users
 func getUsers(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
