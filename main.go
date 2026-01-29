@@ -8,6 +8,8 @@ import (
 	"os"
 
 	"github.com/gorilla/mux"
+	
+	// import Package pq is a pure Go Postgres
 	_ "github.com/lib/pq"
 )
 
@@ -19,15 +21,15 @@ type User struct {
 
 func newRouter(db *sql.DB) http.Handler {
 	humans := "/humans"
-	humans_id := "/humans/{id}"
+	humansId := "/humans/{id}"
 	//create router
 	router := mux.NewRouter()
 	router.HandleFunc("/", root()).Methods("GET")
 	router.HandleFunc(humans, getUsers(db)).Methods("GET")
-	router.HandleFunc(humans_id, getUser(db)).Methods("GET")
+	router.HandleFunc(humansId, getUser(db)).Methods("GET")
 	router.HandleFunc(humans, createUser(db)).Methods("POST")
-	router.HandleFunc(humans_id, updateUser(db)).Methods("PUT")
-	router.HandleFunc(humans_id, deleteUser(db)).Methods("DELETE")
+	router.HandleFunc(humansId, updateUser(db)).Methods("PUT")
+	router.HandleFunc(humansId, deleteUser(db)).Methods("DELETE")
 
 	return jsonContentTypeMiddleware(router)
 }
@@ -157,7 +159,7 @@ func deleteUser(db *sql.DB) http.HandlerFunc {
 		} else {
 			_, err := db.Exec("DELETE FROM humans WHERE id = $1", id)
 			if err != nil {
-				//todo : fix error handling
+				// Todo : fix error handling
 				w.WriteHeader(http.StatusNotFound)
 				return
 			}
