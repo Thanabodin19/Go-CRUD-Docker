@@ -7,11 +7,9 @@ WORKDIR /app
 # Copy the source code
 COPY . . 
 
-# Download and install the dependencies
-RUN go get -d -v ./...
-
-# Build the Go app
-RUN go build -o api .
+# Download and install the dependencies + Build the Go app
+RUN go get -d -v ./... \
+    && go build -o api .
 
 #EXPOSE the port
 EXPOSE 8000
