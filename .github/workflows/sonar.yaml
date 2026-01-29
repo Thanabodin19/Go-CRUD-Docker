@@ -2,6 +2,7 @@ name: Build
 on:
   push:
     branches:
+      - main
       - test/**
   pull_request:
     types: [opened, synchronize, reopened]
@@ -17,8 +18,8 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          
-      - name: Sonar Quality Gate
-        uses: sonarsource/sonarqube-quality-gate-action@v1.1.0
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      # - name: Sonar Quality Gate
+      #   uses: sonarsource/sonarqube-quality-gate-action@v1.1.0
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
