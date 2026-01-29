@@ -17,6 +17,21 @@ type User struct {
 	L_name  string `json:"L_name"`
 }
 
+func newRouter(db *sql.DB) http.Handler {
+	humans := "/humans"
+	humans_id := "/humans/{id}"
+	//create router
+	router := mux.NewRouter()
+	router.HandleFunc("/", root()).Methods("GET")
+	router.HandleFunc(humans, getUsers(db)).Methods("GET")
+	router.HandleFunc(humans_id, getUser(db)).Methods("GET")
+	router.HandleFunc(humans, createUser(db)).Methods("POST")
+	router.HandleFunc(humans_id, updateUser(db)).Methods("PUT")
+	router.HandleFunc(humans_id, deleteUser(db)).Methods("DELETE")
+
+	return jsonContentTypeMiddleware(router)
+}
+
 func main() {
 	//connect to database
 	db, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
@@ -32,19 +47,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	humans := "/humans"
-	humans_id := "/humans/{id}"
-	//create router
-	router := mux.NewRouter()
-	router.HandleFunc("/", root()).Methods("GET")
-	router.HandleFunc(humans, getUsers(db)).Methods("GET")
-	router.HandleFunc(humans_id, getUser(db)).Methods("GET")
-	router.HandleFunc(humans, createUser(db)).Methods("POST")
-	router.HandleFunc(humans_id, updateUser(db)).Methods("PUT")
-	router.HandleFunc(humans_id, deleteUser(db)).Methods("DELETE")
-
 	//start server
-	log.Fatal(http.ListenAndServe(":8000", jsonContentTypeMiddleware(router)))
+	log.Fatal(http.ListenAndServe(":8000", newRouter(db)))
 }
 
 
